@@ -1,0 +1,16 @@
+
+    <div *ngFor = "let nav of navigations" 
+    class="ps-1 py-3 "
+    [class.border-bottom] = "nav.active"
+    [class.border-primary] = "nav.active"
+    [class.border] = "nav.overed"
+    [class.bg-light] = "nav.overed"
+    [style.cursor] = "nav.overed?'pointer':'default'"
+    (mouseover) = "toggle(nav)"
+    (mouseout) = "toggle(nav)"
+    (click) = "onClick(nav)">
+      <i [class]="nav.iconClass"></i> <span class=""
+       [style.cursor] = "nav.overed?'pointer':'default'"
+      >{{nav.nav}}</span>
+    </div>
+    

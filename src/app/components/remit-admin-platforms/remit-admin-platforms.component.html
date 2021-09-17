@@ -1,0 +1,65 @@
+
+	    <div class="row px-3">
+	      <div class="col-md-7 me-4">
+      			<div class="table-responsive">
+      				<table class="table table-hover table-striped table-sm caption-top">
+      					
+					  <thead> 
+					    <tr>
+					      <th scope="col">S/N</th>
+					      <th scope="col" *ngFor = "let heading of headings">{{heading |uppercase}}</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr *ngFor = "let plat of platforms; index as i" (click) = "onClick(plat)" class="remit-clickable">
+					      <th scope="row">{{i+1}}</th>
+					      <td *ngFor = "let att of headings"
+					      >
+					  		{{plat[att]}}
+						</td>
+					      
+					    </tr>
+					    
+					  </tbody>
+					</table>
+      			</div>
+      	</div>
+	      
+	      <div class="col-md-4">
+	        <div class="row p-2">
+      			<div class="col-md-12 shadow-sm rounded mb-4 border py-2">
+      				<div class="d-flex flex-column">
+      					<div class="justify-content-between">
+      						<p class="justify-content-between">
+      							<small class="fs-6 me-2">Platform - {{platform.id || "no platform id"}}</small> 
+      							
+      							 
+      						<small class="rounded-pill px-3 py-2 bg-success remit-clickable" 
+      						(click)="cancel()">New</small>
+      						</p>
+      						
+      					</div>
+      					<form autocomplete="off"
+      					#platformForm = "ngForm"
+      					>
+      						<div class="mb-3" 
+      						*ngFor = "let att of headings">
+							  <label for="formGroupExampleInput" class="form-label">{{att}}</label>
+							  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" name={{att}} [(ngModel)] = "platform[att]">
+							</div>
+							
+							<div class="col-12 justify-content-evenly">
+							    <button (click) = "editPlatform(platformForm.value)"type="submit" class="btn btn-primary">
+							    	<span *ngIf = "platform.id">Update</span>
+							    	<span *ngIf = "!platform.id">Create </span>
+							    </button>
+							    <button (click)="cancel()" type="submit" class="btn btn-success">Cancel</button>
+							 </div>
+      					</form>
+      				</div>
+      			</div>
+	        </div>
+	      </div>
+	    </div>
+	    

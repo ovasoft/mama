@@ -1,0 +1,57 @@
+
+	    <div class="row px-3">
+	      <div class="col-md-7 me-4">
+      			<table class="table table-hover table-striped table-responsive-sm">
+				  <thead> 
+				    <tr>
+				      <th scope="col">S/N</th>
+				      <th scope="col" *ngFor = "let heading of headings">{{heading |uppercase}}</th>
+				      
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr *ngFor = "let usr of users; index as i" (click) = "onClick(usr)">
+				      <th scope="row">{{i+1}}</th>
+				      <td *ngFor = "let att of headings"
+				      >
+				  		{{usr[att]}}
+					</td>
+				      
+				    </tr>
+				    
+				  </tbody>
+				</table>
+      	</div>
+	      
+	      <div class="col-md-4">
+	        <div class="row p-2">
+      			<div class="col-md-12 shadow-sm rounded mb-4 border py-2">
+      				<div class="d-flex flex-column">
+      					<div class="justify-content-between">
+      						<p class="justify-content-between"><small class="fs-6 me-2">User - {{user.id || "no user id"}}</small> <small class="rounded-pill px-3 py-2 bg-primary remit-clickable">exchanges</small> 
+      						<small class="rounded-pill px-3 py-2 bg-success remit-clickable">supports</small>
+      						</p>
+      						
+      					</div>
+      					<form autocomplete="off"
+      					#userForm = "ngForm"
+      					>
+      						<div class="mb-3">
+							  <label for="formGroupExampleInput" class="form-label">Email</label>
+							  <input type="email" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" name="email" [(ngModel)] = "user.email">
+							</div>
+							<div class="mb-3">
+							  <label for="formGroupExampleInput2" class="form-label">Username</label>
+							  <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="username" [(ngModel)] = "user.username">
+							</div>
+							<div class="col-12 justify-content-evenly">
+							    <button (click) = "editUser(userForm.value)"type="submit" class="btn btn-danger">Update</button>
+							    <button (click)="cancel()" type="submit" class="btn btn-primary">Cancel</button>
+							 </div>
+      					</form>
+      				</div>
+      			</div>
+	        </div>
+	      </div>
+	    </div>
+	    

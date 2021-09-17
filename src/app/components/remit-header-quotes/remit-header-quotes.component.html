@@ -1,0 +1,12 @@
+    
+        <p class="m-0">{{quoteData.pair}} 
+            <span class="col-lg-3"
+        [class.text-success] = "getClass()"
+        [class.text-danger] = "!getClass()">
+    {{quoteData.change |percent}}
+            </span>
+        </p>
+           
+            <p class="fs-4 m-0"><b>{{quoteData.price}}</b></p>
+        <small class="fs-6">{{quoteData.exchangeRate | currency}}</small>
+  

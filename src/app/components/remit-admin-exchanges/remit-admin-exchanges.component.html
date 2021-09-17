@@ -1,0 +1,69 @@
+
+	    <div class="row px-3">
+	      <div class="col-md-7 me-4">
+      			<div class="table-responsive">
+      				<table class="table table-hover table-striped table-sm caption-top">
+      					<caption>
+      					<div class="form-check form-switch form-check-inline"
+      					*ngFor = "let filter of filterKeys">
+						  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [(ngModel)]= filters[filter]>
+						  <label class="form-check-label" for="flexSwitchCheckDefault">{{filter|uppercase}}</label>
+						</div>
+      					</caption>
+					  <thead> 
+					    <tr>
+					      <th scope="col">S/N</th>
+					      <th scope="col" *ngFor = "let heading of headings">{{heading |uppercase}}</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr *ngFor = "let exc of exchanges; index as i" (click) = "onClick(exc)" class="remit-clickable">
+					      <th scope="row">{{i+1}}</th>
+					      <td *ngFor = "let att of headings"
+					      >
+					  		{{exc[att]}}
+						</td>
+					      
+					    </tr>
+					    
+					  </tbody>
+					</table>
+      			</div>
+      	</div>
+	      
+	      <div class="col-md-4">
+	        <div class="row p-2">
+      			<div class="col-md-12 shadow-sm rounded mb-4 border py-2">
+      				<div class="d-flex flex-column">
+      					<div class="justify-content-between">
+      						<p class="justify-content-between">
+      							<small class="fs-6 me-2">Exchange - {{exchange.id || "no exchange id"}}</small> 
+      							<small class="rounded-pill px-3 py-2 bg-primary remit-clickable" 
+      							(click) = "editExchange(exchangeForm.value)">Update</small>
+      							 
+      						<small class="rounded-pill px-3 py-2 bg-success remit-clickable" 
+      						(click)="cancel()">Cancel</small>
+      						</p>
+      						
+      					</div>
+      					<form autocomplete="off"
+      					#exchangeForm = "ngForm"
+      					>
+      						<div class="mb-3" 
+      						*ngFor = "let att of headings">
+							  <label for="formGroupExampleInput" class="form-label">{{att}}</label>
+							  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" name={{att}} [(ngModel)] = "exchange[att]">
+							</div>
+							
+							<div class="col-12 justify-content-evenly">
+							    <button (click) = "editExchange(exchangeForm.value)"type="submit" class="btn btn-primary">Update</button>
+							    <button (click)="cancel()" type="submit" class="btn btn-success">Cancel</button>
+							 </div>
+      					</form>
+      				</div>
+      			</div>
+	        </div>
+	      </div>
+	    </div>
+	    

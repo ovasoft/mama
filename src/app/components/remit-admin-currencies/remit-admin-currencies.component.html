@@ -1,0 +1,172 @@
+<div class="row px-3 row-cols-1 row-cols-md-3 g-4">
+	<div class="col" *ngFor = "let currency of currencies; index as ind;">
+	    <div class="card h-100">
+	    	<div class="card-header">
+			    <ul class="nav nav-tabs card-header-tabs">
+			      <li class="nav-item " role="presentation">
+			      	<!--[class.active] = "currency.showing" -->
+				    <button class="nav-link active"
+				    	
+				     [id]="'home-tab'+ind" data-bs-toggle="tab" [attr.data-bs-target] = "'#home'+ind" type="button" role="tab" [attr.aria-controls]="'home'+ind" aria-selected="true" (click)="cl($event,currency)">
+				    	<img [src]="currency.imageUrl" class="" width="20px" height="20px" alt="...">
+				    	{{currency.symbol}}
+				    </button>
+				  </li>
+				  <li class="nav-item" role="presentation">
+				  	<!--[class.active] = "!currency.showing" -->
+				    <button class="nav-link " 
+				    
+				    [id]="'setting-tab'+ind" data-bs-toggle="tab" [attr.data-bs-target]="'#setting'+ind" type="button" role="tab" [attr.aria-controls]="'setting'+ind" aria-selected="false" (click)="cl($event,currency)">Setting</button>
+				  </li>
+				  
+				  </ul>	
+			  </div>
+	      <div class="card-body">
+	      	<div class="tab-content" id="myTabContent">
+	      		<!--[class.active] = "currency.showing"
+				  	[class.show] = "currency.showing" -->
+				  <div class="tab-pane fade active show"
+				  	
+				   [id]="'home'+ind" role="tabpanel" [attr.aria-labelledby]="'home-tab'+ind">
+				  	<p class="card-title"> 
+					        	{{currency.symbol}} Summary
+					        </p>
+					        <div class="card-text">
+					        	<p>Payment and Credit Platforms: <span class="me-2" *ngFor="let plat of currency.platforms">{{plat.name}}</span></p>
+					        	<p>Profit Margin : {{currency.profitMargin |percent}}</p>
+					        	<p>Type : {{currency.type | uppercase}}</p>
+					        	<p>Lasted edited by : {{currency.lastEditedBy}}</p>
+					        </div>
+				  </div>
+				  <!--[class.active] = "!currency.showing"
+				  	[class.show] = "!currency.showing" -->
+		  <div class="tab-pane fade " 
+		  [id]="'setting'+ind" role="tabpanel" 
+		  [attr.aria-labelledby]="'setting-tab'+ind">
+		  	<form autocomplete="off" #curChange = "ngForm"
+		  	 (ngSubmit) = "formSubmit(curChange.value)">
+		  		<div class="row g-3">
+			  		<div class="mb-3 col">
+					  <label for="formGroupExampleInput" class="form-label">Symbol</label>
+					  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Symbol" name="symbol" [(ngModel)] = modelCurrency.symbol>
+					</div>	
+					<div class="mb-3 col">
+					  <label for="formGroupExampleInput" class="form-label">Profit Margin</label>
+					  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Symbol" name="profitMargin" [(ngModel)] = modelCurrency.profitMargin>
+					</div>
+				</div>
+				<div class="row g-3">
+					
+					<div class="form-check form-switch form-check-inline col-12"
+						*ngFor = "let platform of platforms">
+					  <label class="form-check-label" for="flexSwitchCheckDefault">{{"Accept and Pay "+ currency.symbol +" on "+ platform.name|uppercase}}</label>
+					  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+					  [name]="platform.name" [(ngModel)] = "modelCurrency[platform.name]">
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-12">
+						<label class="form-label me-3">Type: </label>
+						<div class="form-check form-check-inline"
+						*ngFor = "let ty of currencyTypes">
+						  <input class="form-check-input" type="radio" name="type" 
+						  id="exampleRadios1" [value]="ty" [(ngModel)]="modelCurrency.type" >
+						  <label class="form-check-label" for="exampleRadios1">
+						    {{ty}}
+						  </label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row g-3">
+					<span class="col-3 rounded rounded-pill bg-danger remit-clickable p-2 text-center">Cancel</span>
+					<button class="col-3 offset-5 btn btn-success ty"
+					 
+					>Update</button>
+				</div>
+					
+		  		
+		  	</form>
+
+		  </div>
+		  
+		</div>
+	        
+	      </div></div>
+	  </div>
+	<div class="col">
+	    <div class="card h-100">
+	    	
+	      <div class="card-body">
+	      	<div class="tab-content" id="myTabContent">
+	      		<!--[class.active] = "currency.showing"
+				  	[class.show] = "currency.showing" -->
+				  <div class="tab-pane fade active show">
+				  	<button class="nav-link active"
+				    	
+				     id="new-tab" data-bs-toggle="tab" attr.data-bs-target = "#new" type="button" role="tab" attr.aria-controls="new" aria-selected="true" >
+				    	<img src="" class="" width="20px" height="20px" alt="...">
+				    	New
+				    </button>
+				  
+				  </div>
+				  <!--[class.active] = "!currency.showing"
+				  	[class.show] = "!currency.showing" -->
+		  <div class="tab-pane fade " 
+		  id="new" role="tabpanel" 
+		  attr.aria-labelledby="new-tab">
+		  	<form autocomplete="off" #curChange = "ngForm"
+		  	 (ngSubmit) = "formSubmit(curChange.value)">
+		  		<div class="row g-3">
+			  		<div class="mb-3 col">
+					  <label for="formGroupExampleInput" class="form-label">Symbol</label>
+					  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Symbol" name="symbol" [(ngModel)] = modelCurrency.symbol>
+					</div>	
+					<div class="mb-3 col">
+					  <label for="formGroupExampleInput" class="form-label">Profit Margin</label>
+					  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Symbol" name="profitMargin" [(ngModel)] = modelCurrency.profitMargin>
+					</div>
+				</div>
+				<div class="row g-3">
+					
+					<div class="form-check form-switch form-check-inline col-12"
+						*ngFor = "let platform of platforms">
+					  <label class="form-check-label" for="flexSwitchCheckDefault">{{"Accept and Pay "+ modelCurrency.symbol +" on "+ platform.name|uppercase}}</label>
+					  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+					  [name]="platform.name" [(ngModel)] = "modelCurrency[platform.name]">
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-12">
+						<label class="form-label me-3">Type: </label>
+						<div class="form-check form-check-inline"
+						*ngFor = "let ty of currencyTypes">
+						  <input class="form-check-input" type="radio" name="type" 
+						  id="exampleRadios1" [value]="ty" [(ngModel)]="modelCurrency.type" >
+						  <label class="form-check-label" for="exampleRadios1">
+						    {{ty}}
+						  </label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row g-3">
+					<span class="col-3 rounded rounded-pill bg-danger remit-clickable p-2 text-center">Cancel</span>
+					<button class="col-3 offset-5 btn btn-success ty"
+					 
+					>Update</button>
+				</div>
+					
+		  		
+		  	</form>
+
+		  </div>
+		  
+		</div>
+	        
+	      </div>  	
+  	
+</div>
+</div>
+</div>
+

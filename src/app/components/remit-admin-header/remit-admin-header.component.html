@@ -1,0 +1,27 @@
+<div class="row mb-4 ps-3 mt-2">
+  <div class="d-flex flex-row shadow-sm p-3 border ">
+  	<div class="me-2 py-2">
+        <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+           <g>
+            <title>Layer 1</title>
+            <ellipse ry="22.125" rx="23.25" id="svg_1" cy="22.125" cx="26.25" stroke="#999999" fill="#ffffff"/>
+            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_2" y="31" x="43" stroke="#000" fill="#000000"/>
+            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_5" y="30.24999" x="50.74999" stroke-width="0" stroke="#84D3DB" fill="#ffffff"/>
+            <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_6" y="30.24999" x="7.25001" stroke="#999999" fill="#ffffff">{{headerInfo.initials}}</text>
+           </g> 
+        </svg>
+    </div>
+    <div class="px-2">
+      <span class="me-3" >{{headerInfo.email}}</span>
+    <span class="me-3">User ID : {{headerInfo.id}}</span>
+    <span  class="badge bg-primary">{{headerInfo.role}}</span><br>
+    <small class="text-muted">
+    Last Login  : {{headerInfo.lastLogin | date : 'yyyy-MM-dd'}}
+    </small>
+    <br>
+    <small class="text-muted">
+    IP :  {{headerInfo.ip}}
+    </small>
+    </div>
+  </div>
+</div>
